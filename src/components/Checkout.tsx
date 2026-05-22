@@ -5,7 +5,12 @@ import { useState } from "react";
 import { loadTossPayments } from "@tosspayments/tosspayments-sdk";
 
 import { BrandHeader } from "./Brand";
-import { type Product, formatKRW } from "@/lib/products";
+import {
+  type Product,
+  formatKRW,
+  vatAmount,
+  vatIncludedAmount,
+} from "@/lib/products";
 
 const CLIENT_KEY = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY ?? "";
 
@@ -148,13 +153,23 @@ export function Checkout({
           <p className="mt-1 text-sm text-[color:var(--color-ink-muted)]">
             {product.orderName}
           </p>
-          <div className="mt-3 flex items-baseline justify-between border-t border-primary-100 pt-3">
-            <span className="text-sm text-[color:var(--color-ink-muted)]">
-              결제 금액
-            </span>
-            <span className="text-2xl font-bold text-primary-600">
-              {formatKRW(product.amount)}
-            </span>
+          <div className="mt-3 flex flex-col gap-1.5 border-t border-primary-100 pt-3">
+            <div className="flex items-center justify-between text-sm text-[color:var(--color-ink-muted)]">
+              <span>공급가액</span>
+              <span>{formatKRW(product.amount)}</span>
+            </div>
+            <div className="flex items-center justify-between text-sm text-[color:var(--color-ink-muted)]">
+              <span>부가세 (10%)</span>
+              <span>{formatKRW(vatAmount(product.amount))}</span>
+            </div>
+            <div className="mt-1 flex items-baseline justify-between border-t border-primary-100 pt-2">
+              <span className="text-sm font-medium text-[color:var(--color-ink)]">
+                총 결제 금액
+              </span>
+              <span className="text-2xl font-bold text-primary-600">
+                {formatKRW(vatIncludedAmount(product.amount))}
+              </span>
+            </div>
           </div>
         </div>
 
@@ -214,7 +229,9 @@ export function Checkout({
           {loading ? (
             <span className="h-4 w-4 animate-spin-slow rounded-full border-2 border-white/40 border-t-white" />
           ) : null}
-          {loading ? "결제창 여는 중..." : `${formatKRW(product.amount)} 결제하기`}
+          {loading
+            ? "결제창 여는 중..."
+            : `${formatKRW(vatIncludedAmount(product.amount))} 결제하기`}
         </button>
 
         <p className="mt-3 text-center text-xs text-[color:var(--color-ink-muted)]">

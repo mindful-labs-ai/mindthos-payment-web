@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 import { GATE_COOKIE, verifyGateToken } from "@/lib/access";
-import { getProduct } from "@/lib/products";
+import { getProduct, vatIncludedAmount } from "@/lib/products";
 import {
   TossApiError,
   approveBillingPayment,
@@ -73,11 +73,12 @@ export async function POST(request: Request) {
     // 4) 빌링키 발급
     const { billingKey } = await issueBillingKey({ authKey, customerKey });
 
-    // 5) 빌링키로 실제 결제 승인
+    // 5) 빌링키로 실제 결제 승인 (부가세 포함 금액으로 청구)
+    const chargeAmount = vatIncludedAmount(product.amount);
     const payment = await approveBillingPayment({
       billingKey,
       customerKey,
-      amount: product.amount,
+      amount: chargeAmount,
       orderId,
       orderName: product.orderName,
       customerName,

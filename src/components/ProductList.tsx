@@ -50,6 +50,9 @@ export function ProductList({
                 <p className="text-xl font-bold text-primary-600">
                   {formatKRW(product.amount)}
                 </p>
+                <p className="mt-0.5 text-xs text-[color:var(--color-ink-muted)]">
+                  부가세 별도
+                </p>
               </div>
             </div>
 

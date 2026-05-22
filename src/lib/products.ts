@@ -62,6 +62,19 @@ export function getProduct(id: string): Product | null {
   return PRODUCTS.find((p) => p.id === id) ?? null;
 }
 
+/** 부가가치세율 (10%) */
+export const VAT_RATE = 0.1;
+
+/** 부가세 포함 총 결제 금액 (실제 청구 금액) */
+export function vatIncludedAmount(supplyAmount: number): number {
+  return Math.round(supplyAmount * (1 + VAT_RATE));
+}
+
+/** 부가세 금액 */
+export function vatAmount(supplyAmount: number): number {
+  return vatIncludedAmount(supplyAmount) - supplyAmount;
+}
+
 export function formatKRW(amount: number): string {
   return amount.toLocaleString("ko-KR") + "원";
 }
