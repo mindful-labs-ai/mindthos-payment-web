@@ -1,0 +1,25 @@
+{
+  "name": "mindthos-payment-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "마음토스 기관 전용 결제창 (토스페이먼츠 빌링 결제)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@tosspayments/tosspayments-sdk": "^2.4.1",
+    "next": "^15",
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
