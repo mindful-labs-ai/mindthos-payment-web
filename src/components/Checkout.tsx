@@ -48,7 +48,7 @@ export function Checkout({
   onBack,
 }: {
   product: Product;
-  onBack: () => void;
+  onBack?: () => void;
 }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -124,26 +124,28 @@ export function Checkout({
       <BrandHeader />
 
       <div className="mt-6 rounded-2xl border border-[color:var(--color-line)] bg-white p-6 shadow-sm">
-        <button
-          type="button"
-          onClick={onBack}
-          disabled={loading}
-          className="mb-4 inline-flex items-center gap-1 text-sm text-[color:var(--color-ink-muted)] transition hover:text-[color:var(--color-ink)] disabled:opacity-50"
-        >
-          <svg
-            className="h-4 w-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
+        {onBack ? (
+          <button
+            type="button"
+            onClick={onBack}
+            disabled={loading}
+            className="mb-4 inline-flex items-center gap-1 text-sm text-[color:var(--color-ink-muted)] transition hover:text-[color:var(--color-ink)] disabled:opacity-50"
           >
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-          상품 다시 선택
-        </button>
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            상품 다시 선택
+          </button>
+        ) : null}
 
         {/* 주문 요약 */}
         <div className="rounded-xl bg-primary-50 p-4">
