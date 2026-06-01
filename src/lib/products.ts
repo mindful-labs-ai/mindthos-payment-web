@@ -67,12 +67,12 @@ export const PRODUCTS: Product[] = [
 export const INSTITUTION_PRODUCTS: Product[] = [
   {
     id: "hyangdong",
-    name: "향동고등학교 이용권",
-    orderName: "마음토스 향동고등학교 이용권",
+    name: "향동고등학교",
+    orderName: "마음토스 기관 이용권",
     amount: 180_000,
-    period: "12개월",
+    period: "",
     tagline: "향동고등학교 전용 결제 링크예요.",
-    features: ["AI 상담노트 무제한", "12개월 정기 이용권"],
+    features: ["AI 상담노트 무제한"],
   },
 ];
 

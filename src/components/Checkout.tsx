@@ -150,7 +150,7 @@ export function Checkout({
         {/* 주문 요약 */}
         <div className="rounded-xl bg-primary-50 p-4">
           <p className="text-sm font-medium text-primary-700">
-            {product.name} · {product.period}
+            {product.period ? `${product.name} · ${product.period}` : product.name}
           </p>
           <p className="mt-1 text-sm text-[color:var(--color-ink-muted)]">
             {product.orderName}
